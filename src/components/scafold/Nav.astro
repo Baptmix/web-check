@@ -1,10 +1,11 @@
 ---
+import Logo from '@components/molecules/Logo.astro';
 ---
 
 <nav class="navbar">
   <div class="nav-left">
     <a href="/" class="logo-link" aria-label="Home">
-      <img width="64" src="/favicon.svg" alt="Site Logo" />
+      <Logo />
       <h2 class="site-title">
         <span class="first">Web</span>
         <span class="second">Check</span>
@@ -43,7 +44,7 @@
     margin: 0 auto;
     border-radius: 2rem;
     border: 1px solid var(--primary-transparent);
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 30px var(--shadow-color);
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     .nav-left {
@@ -58,7 +59,7 @@
         text-decoration: none;
         color: var(--text-color);
 
-        img {
+        :global(.logo) {
           width: 2rem;
           max-width: 64px;
           margin-right: 0.5rem;
@@ -88,14 +89,9 @@
         color: var(--text-color);
         margin-left: 1rem;
         padding: 0.5rem;
-        transition: background-color 0.3s;
         position: relative;
-        &:hover {
-          background-color: var(--primary-light);
-        }
         &:focus {
           outline: none;
-          background-color: var(--primary-dark);
           box-shadow: 0 0 0 3px var(--primary);
         }
         &:after {

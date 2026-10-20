@@ -45,7 +45,7 @@ const { terms, linkToGlossary = false } = Astro.props;
     }
 
     &:target dt {
-      color: var(--primary);
+      color: var(--primary-increased-contrast);
     }
   }
 
@@ -59,7 +59,7 @@ const { terms, linkToGlossary = false } = Astro.props;
 
       &:hover,
       &:focus-visible {
-        color: var(--primary);
+        color: var(--primary-increased-contrast);
       }
     }
   }
@@ -75,11 +75,11 @@ const { terms, linkToGlossary = false } = Astro.props;
       width: fit-content;
       margin-top: 0.25rem;
       font-size: 0.85rem;
-      color: var(--text-color-thirdly);
+      color: var(--text-color-tertiary);
 
       &:hover,
       &:focus-visible {
-        color: var(--primary);
+        color: var(--primary-increased-contrast);
       }
     }
   }

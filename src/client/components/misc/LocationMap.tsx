@@ -23,7 +23,7 @@ const MapChart = (location: Props) => {
     >
       <Geographies
         geography={MapFeatures}
-        fill={colors.backgroundDarker}
+        fill={colors.backgroundSunken}
         stroke={colors.primary}
         strokeWidth={0.5}
       >

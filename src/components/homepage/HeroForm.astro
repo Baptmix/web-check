@@ -2,12 +2,13 @@
 import AnimatedButton from '@components/form/AnimatedButton.astro';
 import AnimatedInput from '@components/form/AnimatedInput.astro';
 import LayerStack from './LayerStack.astro';
+import Logo from '@components/molecules/Logo.astro';
 ---
 
 <div class="hero">
   <div class="left">
     <h1>
-      <img src="/favicon.svg" alt="Check Web" width="64" />
+      <Logo />
       <span class="web">Web</span>
       <span class="check">Check</span>
     </h1>
@@ -73,8 +74,7 @@ import LayerStack from './LayerStack.astro';
       display: flex;
       gap: 0.1rem;
       align-items: center;
-      img {
-        vertical-align: middle;
+      :global(.logo) {
         width: 3rem;
         margin-right: 0.5rem;
       }
@@ -103,7 +103,7 @@ import LayerStack from './LayerStack.astro';
         font-weight: normal;
         font-size: 1.3rem;
         span {
-          color: var(--primary);
+          color: var(--primary-increased-contrast);
           font-style: italic;
         }
       }

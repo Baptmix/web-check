@@ -1,4 +1,5 @@
 import type { Analyzer, Result } from '../types';
+import { formatNumber } from 'client/utils/format';
 
 const SLOW_MS = 2000;
 const VERY_SLOW_MS = 5000;
@@ -8,11 +9,13 @@ export const checkResponseTime = (ms: number): Result | null => {
   if (ms >= VERY_SLOW_MS) {
     return {
       severity: 'warning',
-      title: `Slow response time: ${Math.round(ms)}ms`,
+      title: `Slow response time: ${formatNumber(ms, { digits: 0 })}ms`,
       detail: 'Investigate server performance, caching or CDN coverage',
     };
   }
-  if (ms >= SLOW_MS) return { severity: 'info', title: `Response time over ${SLOW_MS}ms` };
+  if (ms >= SLOW_MS) {
+    return { severity: 'info', title: `Response time over ${formatNumber(SLOW_MS)}ms` };
+  }
   return null;
 };
 

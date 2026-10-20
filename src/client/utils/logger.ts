@@ -1,5 +1,3 @@
-import colors from 'client/styles/colors';
-
 type Outcome = 'success' | 'error' | 'timed-out';
 
 const HEADING: Record<Outcome, string> = {
@@ -15,9 +13,9 @@ const VERB: Record<Outcome, string> = {
 };
 
 const ACCENT: Record<Outcome, string> = {
-  success: colors.success,
-  error: colors.danger,
-  'timed-out': colors.info,
+  success: '#20e253',
+  error: '#f80363',
+  'timed-out': '#04e4f4',
 };
 
 // HH:MM:SS clock prefix.
@@ -39,14 +37,14 @@ export const logJobOutcome = (
       ? `\n%cRun %cwindow.webCheck['${job}']%c to inspect the raw results`
       : `, with the following error:%c\n${detail || 'Unknown error'}`;
   const styles = [
-    `background:${accent};color:${colors.backgroundDarker};padding:4px 8px;font-size:16px;border-radius:2px;`,
+    `background:${accent};color:#000;padding:4px 8px;font-size:16px;border-radius:2px;`,
     `font-weight:bold;color:${accent};`,
     `color:${accent};`,
   ];
   const trailStyles =
     outcome === 'success'
       ? [`color:#1d8242;`, `color:#1d8242;text-decoration:underline;`, `color:#1d8242;`]
-      : [`color:${colors.warning};`];
+      : [`color:#f6f000;`];
   console.log(
     `%c${HEADING[outcome]} - ${job}%c\n\n${stamp(new Date())}%c The ${job} job ${VERB[outcome]} ${timeTaken}ms${trail}`,
     ...styles,

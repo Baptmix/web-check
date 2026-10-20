@@ -21,8 +21,11 @@ const MeteorContainer = styled(motion.div)`
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background-color: #9fef00;
+  background-color: var(--primary);
   top: 1px;
+  html[data-motion='reduce'] & {
+    display: none;
+  }
 `;
 
 const Tail = styled(motion.div)`
@@ -31,7 +34,7 @@ const Tail = styled(motion.div)`
   left: 1px;
   width: 2px;
   height: 80px;
-  background: linear-gradient(to bottom, transparent, #9fef00);
+  background: linear-gradient(to bottom, transparent, var(--primary));
 `;
 
 const StyledSvg = styled.svg`
@@ -40,7 +43,7 @@ const StyledSvg = styled.svg`
   inset: 0;
   height: 100%;
   width: 100%;
-  fill: rgba(100, 100, 100, 0.5);
+  fill: color-mix(in srgb, var(--text-color) 16%, transparent);
   height: 100vh;
 `;
 

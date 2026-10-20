@@ -4,6 +4,8 @@ import Footer from '@components/scafold/Footer.astro';
 import HomeBackground from '@components/homepage/HomeBackground';
 import ScanForm from '@components/form/ScanForm.astro';
 import SponsorCard from '@components/molecules/SponsorCard.astro';
+import Settings from '@components/settings/Settings.astro';
+import Logo from '@components/molecules/Logo.astro';
 import { normalizeAddress } from '../../client/utils/address-type-checker';
 import { isCategory } from '@/data/categories';
 import { checks, checkIds, isCheck } from '@/data/checks';
@@ -27,10 +29,13 @@ if (redirectPath) return Astro.redirect(redirectPath);
     <HomeBackground client:only="react" opacity={0.25} />
   </div>
   <div class="home">
-    <h1>
-      <img src="/favicon.svg" alt="" width="48" height="48" />
-      Web <em>Check</em>
-    </h1>
+    <header>
+      <h1>
+        <Logo />
+        Web <em>Check</em>
+      </h1>
+      <Settings />
+    </header>
     <ScanForm label="Enter a URL" showCategories />
     <div>
       <h2>Checks</h2>
@@ -62,7 +67,16 @@ if (redirectPath) return Astro.redirect(redirectPath);
     flex-direction: column;
     gap: 4rem;
 
+    header {
+      display: flex;
+      flex-wrap: wrap-reverse;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 1rem;
+    }
+
     h1 {
+      flex-grow: 1;
       display: flex;
       align-items: center;
       gap: 0.75rem;
@@ -70,8 +84,8 @@ if (redirectPath) return Astro.redirect(redirectPath);
       font-size: clamp(2.25rem, 6vw, 3.5rem);
       color: var(--primary);
 
-      img {
-        width: 1em;
+      :global(.logo) {
+        color: var(--text-color);
       }
 
       em {
@@ -84,7 +98,7 @@ if (redirectPath) return Astro.redirect(redirectPath);
       font-size: 0.85rem;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      color: var(--primary);
+      color: var(--primary-increased-contrast);
     }
 
     ul {
@@ -105,7 +119,7 @@ if (redirectPath) return Astro.redirect(redirectPath);
 
         &:hover,
         &:focus-visible {
-          color: var(--primary);
+          color: var(--primary-increased-contrast);
         }
       }
     }

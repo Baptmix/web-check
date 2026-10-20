@@ -4,6 +4,7 @@ import colors from 'client/styles/colors';
 import Heading from 'client/components/Form/Heading';
 import { StatusIcon, type Status } from 'client/components/misc/Icon';
 import Tooltip from 'client/components/misc/Tooltip';
+import { formatDate } from 'client/utils/format';
 import { termText, type TermId } from '@/data/glossary';
 
 export interface RowProps {
@@ -33,7 +34,7 @@ export const StyledRow = styled.div`
   > a {
     color: ${colors.textColor};
     &:hover {
-      color: ${colors.primary};
+      color: ${colors.primaryIncreasedContrast};
     }
   }
   /* Labels keep a third of the row, so long values can't squash them */
@@ -59,7 +60,7 @@ export const StyledRow = styled.div`
       text-overflow: ellipsis;
     }
     a {
-      color: ${colors.primary};
+      color: ${colors.primaryIncreasedContrast};
     }
   }
 `;
@@ -133,14 +134,6 @@ const isDateLike = (value: any): boolean => {
   return date >= new Date('1995-01-01') && date <= new Date('2030-12-31');
 };
 
-const formatDate = (dateString: string): string => {
-  return new Intl.DateTimeFormat('en-GB', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  }).format(new Date(dateString));
-};
-
 // The text shown for a value, with dates formatted and booleans as yes or no
 const valueText = ({ val, yes = 'Yes', no = 'No' }: RowProps): string => {
   if (typeof val === 'boolean') return val ? yes : no;
@@ -192,7 +185,13 @@ export const Section = (props: {
 }) => {
   const { title, collapsible, children } = props;
   const heading = (
-    <Heading as="h4" size="small" align="left" color={colors.primary} inline={collapsible}>
+    <Heading
+      as="h4"
+      size="small"
+      align="left"
+      color={colors.primaryIncreasedContrast}
+      inline={collapsible}
+    >
       {title}
     </Heading>
   );

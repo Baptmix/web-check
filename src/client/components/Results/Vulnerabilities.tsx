@@ -3,6 +3,7 @@ import { Card } from 'client/components/Form/Card';
 import Row from 'client/components/Form/Row';
 import { fromFinding } from 'client/components/misc/Icon';
 import type { Vuln } from 'client/utils/result-processor';
+import { formatNumber } from 'client/utils/format';
 import checkVulns from 'client/analysis/rules/vulnerabilities';
 
 const cardStyles = `
@@ -12,7 +13,7 @@ const cardStyles = `
   }
   .cves a {
     color: ${colors.textColor};
-    &:hover { color: ${colors.primary} }
+    &:hover { color: ${colors.primaryIncreasedContrast} }
   }
   b { color: ${colors.danger} }
   small { color: ${colors.textColorSecondary} }
@@ -43,8 +44,8 @@ const VulnerabilitiesCard = (props: {
             </span>
             <small>
               {[
-                v.epss != null && `EPSS ${(v.epss * 100).toFixed(1)}%`,
-                v.cvss != null && `CVSS ${v.cvss}`,
+                v.epss != null && `EPSS ${formatNumber(v.epss * 100, { digits: 1 })}%`,
+                v.cvss != null && `CVSS ${formatNumber(v.cvss, { digits: 1 })}`,
                 v.port && `${v.product || 'Port'} ${v.port}`,
               ]
                 .filter(Boolean)

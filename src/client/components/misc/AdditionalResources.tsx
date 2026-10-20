@@ -46,8 +46,7 @@ const ResourceListOuter = styled.ul`
     margin: 0;
   }
   .resource-link {
-    color: ${colors.primary};
-    opacity: 0.75;
+    color: ${colors.primaryIncreasedContrast};
     font-size: 0.9rem;
     transition: all 0.2s ease-in-out;
     text-decoration: underline;
@@ -75,10 +74,10 @@ const ResourceListOuter = styled.ul`
 
 const Note = styled.small`
   margin-top: 1rem;
-  opacity: 0.5;
+  color: ${colors.textColorTertiary};
   display: block;
   a {
-    color: ${colors.primary};
+    color: ${colors.primaryIncreasedContrast};
   }
 `;
 

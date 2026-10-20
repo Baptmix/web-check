@@ -2,6 +2,7 @@ import { Card } from 'client/components/Form/Card';
 import Row from 'client/components/Form/Row';
 import { fromFinding } from 'client/components/misc/Icon';
 import { checkResponseTime } from 'client/analysis/rules/status';
+import { formatNumber } from 'client/utils/format';
 
 const STEPS = [
   ['dns', 'DNS Lookup'],
@@ -20,7 +21,7 @@ const ServerStatusCard = (props: { data: any; title: string; actionButtons: any 
       {serverStatus.responseTime && (
         <Row
           lbl="Response Time"
-          val={`${Math.round(serverStatus.responseTime)}ms`}
+          val={`${formatNumber(serverStatus.responseTime, { digits: 0 })}ms`}
           term="response-time"
           {...fromFinding(checkResponseTime(serverStatus.responseTime))}
         />
@@ -28,7 +29,7 @@ const ServerStatusCard = (props: { data: any; title: string; actionButtons: any 
       {STEPS.map(
         ([key, label]) =>
           serverStatus.timings?.[key] > 0 && (
-            <Row key={key} lbl={label} val={`${serverStatus.timings[key]}ms`} />
+            <Row key={key} lbl={label} val={`${formatNumber(serverStatus.timings[key])}ms`} />
           ),
       )}
     </Card>

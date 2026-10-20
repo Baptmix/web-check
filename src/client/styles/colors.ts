@@ -1,22 +1,22 @@
 const colors = {
   primary: 'var(--primary)',
-  primaryLighter: '#cff97a',
+  primaryIncreasedContrast: 'var(--primary-increased-contrast)',
   textColor: 'var(--text-color)',
   textColorSecondary: 'var(--text-color-secondary)',
+  textColorTertiary: 'var(--text-color-tertiary)',
   background: 'var(--background)',
-  backgroundDarker: '#000000',
-  backgroundLighter: 'var(--background-raised)',
+  backgroundSunken: 'var(--background-sunken)',
+  backgroundRaised: 'var(--background-raised)',
   backgroundOverlay: 'var(--background-overlay)',
-  bgShadowColor: '#101010',
   primaryTransparent: 'var(--primary-transparent)',
+  lineStrong: 'var(--line-strong)',
 
   // Action Colors
-  info: '#04e4f4',
-  success: '#20e253',
-  warning: '#f6f000',
-  error: '#fca016',
-  danger: '#f80363',
-  neutral: '#272f4d',
+  info: 'var(--info)',
+  success: 'var(--success)',
+  warning: 'var(--warning)',
+  error: 'var(--error)',
+  danger: 'var(--danger)',
 };
 
 export default colors;

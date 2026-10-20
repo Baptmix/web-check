@@ -1,5 +1,6 @@
 import type { Analyzer, Result } from '../types';
 import { daysUntil } from '../helpers';
+import { formatNumber } from 'client/utils/format';
 
 // A field's value, matching its name in any case, and ignoring numbers added to repeats
 export const getField = (fields: Record<string, string> = {}, name: string) =>
@@ -28,7 +29,7 @@ export const checkExpires = (fields?: Record<string, string>): Result | null => 
   if (days < 0) {
     return {
       severity: 'warning',
-      title: `security.txt expired ${-days} day(s) ago`,
+      title: `security.txt expired ${formatNumber(-days)} day(s) ago`,
       detail: 'Researchers treat an expired file as out of date, so review it and move Expires on',
     };
   }

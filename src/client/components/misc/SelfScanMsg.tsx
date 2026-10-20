@@ -6,7 +6,7 @@ const StyledSelfScanMsg = styled(StyledCard)`
   margin: 0px auto 1rem;
   width: 95vw;
   a {
-    color: ${colors.primary};
+    color: ${colors.primaryIncreasedContrast};
   }
   b {
     font-weight: extra-bold;

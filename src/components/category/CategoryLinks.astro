@@ -42,7 +42,7 @@ const others = categoryIds.filter((category) => category !== current);
       gap: 0.5rem;
       min-height: 44px;
       padding: 0.5rem 1rem;
-      border: 1px solid var(--background-lighter);
+      border: 1px solid var(--border);
       border-radius: 3px;
       color: var(--text-color);
       font-weight: 600;
@@ -57,7 +57,7 @@ const others = categoryIds.filter((category) => category !== current);
       &:hover,
       &:focus-visible {
         border-color: var(--primary);
-        color: var(--primary);
+        color: var(--primary-increased-contrast);
         text-decoration: none;
       }
     }

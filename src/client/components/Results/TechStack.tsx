@@ -26,12 +26,12 @@ const TechStackRow = styled.div`
     gap: 0.5rem;
   }
   .tech-version {
-    opacity: 0.5;
+    color: ${colors.textColorTertiary};
   }
   .tech-confidence,
   .tech-categories {
     font-size: 0.8rem;
-    opacity: 0.5;
+    color: ${colors.textColorTertiary};
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
@@ -56,11 +56,7 @@ const TechStackRow = styled.div`
       word-break: break-all;
     }
     a {
-      color: ${colors.primary};
-      opacity: 0.75;
-      &:hover {
-        opacity: 1;
-      }
+      color: ${colors.primaryIncreasedContrast};
     }
   }
   .tech-icon {

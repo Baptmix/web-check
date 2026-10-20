@@ -393,10 +393,13 @@ export const jobs: JobSpec[] = [
 interface Filter {
   category?: CategoryId;
   check?: CheckId;
+  skip?: string[];
 }
 
-const matches = (card: JobSpec['cards'][number], { category, check }: Filter = {}) =>
-  (!category || card.categories.includes(category)) && (!check || card.id === check);
+// Asking for one check by name runs it, even if it's in the skip list
+const matches = (card: JobSpec['cards'][number], { category, check, skip = [] }: Filter = {}) =>
+  (!category || card.categories.includes(category)) &&
+  (check ? card.id === check : !skip.includes(card.id));
 
 // Jobs to run for a category or single check, cardless jobs like get-ip always run
 export const jobsFor = (filter?: Filter): JobSpec[] =>

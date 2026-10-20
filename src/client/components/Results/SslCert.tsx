@@ -2,6 +2,7 @@ import { Card } from 'client/components/Form/Card';
 import Row, { ExpandableRow, ListRow } from 'client/components/Form/Row';
 import { fromFinding } from 'client/components/misc/Icon';
 import { REASONS, checkExpiry } from 'client/analysis/rules/ssl';
+import { formatNumber } from 'client/utils/format';
 
 function getExtendedKeyUsage(oids: string[]) {
   const oidMap: { [key: string]: string } = {
@@ -71,7 +72,7 @@ const SslCertCard = (props: { data: any; title: string; actionButtons: any }): J
         />
       )}
       {valid_from && <Row lbl="Renewed" val={valid_from} />}
-      {days > 0 && <Row lbl="Lifetime" val={`${days} days`} />}
+      {days > 0 && <Row lbl="Lifetime" val={`${formatNumber(days)} days`} />}
       {serialNumber && <Row lbl="Serial Num" val={serialNumber} />}
       {fingerprint && <Row lbl="Fingerprint" val={fingerprint} />}
       {altNames.length > 0 && (

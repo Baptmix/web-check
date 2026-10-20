@@ -13,12 +13,11 @@ const JobDocsContainer = styled.div`
     padding: 0 0.5rem 0 1rem;
   }
   ul li a {
-    color: ${colors.primary};
+    color: ${colors.primaryIncreasedContrast};
   }
   h4 {
     border-top: 1px solid ${colors.primary};
-    color: ${colors.primary};
-    opacity: 0.75;
+    color: ${colors.primaryIncreasedContrast};
     padding: 0.5rem 0;
   }
 `;

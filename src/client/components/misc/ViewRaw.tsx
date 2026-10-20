@@ -13,7 +13,7 @@ display: flex;
 flex-direction: column;
 max-height: 100%;
 a {
-  color: ${colors.primary};
+  color: ${colors.primaryIncreasedContrast};
 }
 .controls {
   display: flex;
@@ -25,7 +25,7 @@ a {
 small {
   margin-top: 0.5rem;
   font-size: 0.8rem;
-  opacity: 0.5;
+  color: ${colors.textColorTertiary};
 }
 `;
 

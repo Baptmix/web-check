@@ -68,7 +68,7 @@ const LoaderContainer = styled(StyledCard)`
   .pad,
   .via,
   .chip {
-    fill: ${colors.backgroundLighter};
+    fill: ${colors.backgroundRaised};
     stroke: ${colors.textColor};
     stroke-opacity: 0.35;
   }
@@ -118,8 +118,7 @@ const LoaderContainer = styled(StyledCard)`
     margin: 0;
     text-align: center;
     font-size: 0.75rem;
-    color: ${colors.textColorSecondary};
-    opacity: 0.5;
+    color: ${colors.textColorTertiary};
   }
   @keyframes circuit-pulse {
     from {

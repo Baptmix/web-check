@@ -12,7 +12,7 @@ const cardStyles = `
   .color-field {
     border-radius: 4px;
     &:hover {
-      color: ${colors.primary};
+      color: ${colors.primaryIncreasedContrast};
     }
   }
 `;

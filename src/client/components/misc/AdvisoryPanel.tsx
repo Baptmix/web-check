@@ -99,7 +99,7 @@ const Wrapper = styled(Card)`
           cursor: pointer;
           &:hover,
           &:focus-visible {
-            color: ${colors.primary};
+            color: ${colors.primaryIncreasedContrast};
             outline: none;
           }
         }
@@ -147,7 +147,7 @@ const AdvisoryPanel = ({ findings, onJumpTo }: Props): ReactNode => {
             key={sev}
             id={`advisory-${sev}`}
             open={meta.defaultOpen}
-            style={{ background: `${meta.color}0D` }}
+            style={{ background: `color-mix(in srgb, ${meta.color} 5%, transparent)` }}
           >
             <summary style={{ color: meta.color }}>
               {meta.label}

@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import colors from 'client/styles/colors';
 import Card from 'client/components/Form/Card';
 import Heading from 'client/components/Form/Heading';
+import { formatNumber } from 'client/utils/format';
 
 export type LoadingState = 'success' | 'loading' | 'skipped' | 'error' | 'timed-out';
 
@@ -20,7 +21,7 @@ const STATE_META: Record<LoadingState, { emoji: string; color: string }> = {
   loading: { emoji: '🔄', color: colors.info },
   error: { emoji: '❌', color: colors.danger },
   'timed-out': { emoji: '⏸️', color: colors.warning },
-  skipped: { emoji: '⏭️', color: colors.neutral },
+  skipped: { emoji: '⏭️', color: colors.textColorTertiary },
 };
 
 // Tally jobs by their loading state in a single pass
@@ -77,7 +78,7 @@ const Collapsible = styled.div`
 const ProgressBarContainer = styled.div`
   width: 100%;
   height: 0.5rem;
-  background: ${colors.bgShadowColor};
+  background: ${colors.backgroundSunken};
   border-radius: 4px;
   overflow: hidden;
 `;
@@ -131,7 +132,7 @@ const Details = styled.details`
         cursor: pointer;
         &:hover,
         &:focus-visible {
-          color: ${colors.primary};
+          color: ${colors.primaryIncreasedContrast};
           outline: none;
         }
       }
@@ -142,13 +143,12 @@ const Details = styled.details`
   }
   p.error {
     margin: 0.5rem 0;
-    opacity: 0.75;
     color: ${colors.danger};
   }
 `;
 
 const AboutPageLink = styled.a`
-  color: ${colors.primary};
+  color: ${colors.primaryIncreasedContrast};
 `;
 
 const SummaryContainer = styled.div`
@@ -208,7 +208,7 @@ const ReShowRow = styled.div`
       &:hover,
       &:focus-visible {
         text-decoration: underline;
-        color: ${colors.primary};
+        color: ${colors.primaryIncreasedContrast};
         outline: none;
       }
     }
@@ -217,7 +217,7 @@ const ReShowRow = styled.div`
 
 // Re-open trigger styled to match the site's outlined buttons
 const ShowLoadStateButton = styled.button`
-  background: ${colors.backgroundLighter};
+  background: ${colors.backgroundRaised};
   color: ${colors.textColor};
   border: 1px solid ${colors.primaryTransparent};
   padding: 0.3rem 0.7rem;
@@ -231,7 +231,7 @@ const ShowLoadStateButton = styled.button`
     color 0.2s ease-in-out;
   &:hover,
   &:focus-visible {
-    color: ${colors.primary};
+    color: ${colors.primaryIncreasedContrast};
     border-color: ${colors.primary};
     outline: none;
   }
@@ -250,7 +250,7 @@ const DismissButton = styled.button`
   font-family: var(--font-mono);
   cursor: pointer;
   &:hover {
-    color: ${colors.primary};
+    color: ${colors.primaryIncreasedContrast};
   }
 `;
 
@@ -265,7 +265,7 @@ const FailedJobActionButton = styled.button`
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   &:hover {
-    color: ${colors.primary};
+    color: ${colors.primaryIncreasedContrast};
     border-color: ${colors.primary};
   }
 `;
@@ -305,7 +305,7 @@ const JobListItem = ({ job, showJobDocs, showErrorModal }: JobListItemProps): Re
         {STATE_META[state].emoji} {name}
       </button>
       <StateLabel color={STATE_META[state].color}> ({state})</StateLabel>
-      <i>{timeTaken && state !== 'loading' ? ` Took ${timeTaken} ms` : ''}</i>
+      <i>{timeTaken && state !== 'loading' ? ` Took ${formatNumber(timeTaken)} ms` : ''}</i>
       {canRetry && (
         <FailedJobActionButton type="button" onClick={retry}>
           ↻ Retry
@@ -334,7 +334,7 @@ const LoadSummary = ({ jobs, elapsedMs, onOpen }: LoadSummaryProps): ReactNode =
   const total = jobs.length;
   const c = countByState(jobs);
   const issues = c.error + c['timed-out'] + c.skipped;
-  const sec = (elapsedMs / 1000).toFixed(1);
+  const sec = formatNumber(elapsedMs / 1000, { digits: 1 });
   const text = c.loading
     ? `Loading ${total - c.loading} of ${total}` + (elapsedMs < 15000 ? ` (${sec}s)` : '')
     : `Finished ${total} lookups in ${sec}s`;
@@ -373,7 +373,8 @@ const SummaryText = ({ jobs, elapsedMs }: SummaryTextProps): ReactNode => {
   const c = countByState(jobs);
   const isDone = c.loading === 0;
   const hasIssues = c.error > 0 || c['timed-out'] > 0;
-  const elapsed = elapsedMs >= 10_000 ? `${(elapsedMs / 1000).toFixed(1)} s` : `${elapsedMs} ms`;
+  const seconds = formatNumber(elapsedMs / 1000, { digits: 1 });
+  const elapsed = elapsedMs >= 10_000 ? `${seconds} s` : `${formatNumber(elapsedMs)} ms`;
   const chip = (k: ChipKey) =>
     c[k] > 0 && (
       <span key={k} className={k}>
@@ -427,7 +428,8 @@ const ProgressLoader = ({ loadStatus, showModal, showJobDocs }: ProgressLoaderPr
         <Heading as="h3">Details for {job.name}</Heading>
         <p>
           The {job.name} job ended with state '{job.state}'
-          {job.timeTaken !== undefined ? ` after ${job.timeTaken} ms` : ''}. {detailsLabel}
+          {job.timeTaken !== undefined ? ` after ${formatNumber(job.timeTaken)} ms` : ''}.{' '}
+          {detailsLabel}
         </p>
         <pre className={isInfo ? 'info' : 'error'}>{job.error}</pre>
       </ErrorModalContent>,

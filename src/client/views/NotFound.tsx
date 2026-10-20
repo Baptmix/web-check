@@ -11,7 +11,7 @@ const AboutContainer = styled.div`
   margin: 2rem auto;
   padding-bottom: 1rem;
   a {
-    color: ${colors.primary};
+    color: ${colors.primaryIncreasedContrast};
   }
   .im-drink {
     font-size: 6rem;

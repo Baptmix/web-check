@@ -22,6 +22,7 @@ import ViewRaw from 'client/components/misc/ViewRaw';
 import { determineAddressType, type AddressType } from 'client/utils/address-type-checker';
 import { hasData } from 'client/utils/result-processor';
 import keys from 'client/utils/get-keys';
+import { getSetting } from 'client/utils/settings';
 import useJobs from 'client/hooks/useJobs';
 import { isCategory } from '@/data/categories';
 import { checks, isCheck } from '@/data/checks';
@@ -73,8 +74,9 @@ const Results = (props: { address?: string }): JSX.Element => {
   // Optional category or check in the path narrows the scan, unknown values fall back to everything
   const category = isCategory(tool) ? tool : undefined;
   const check = isCheck(tool) ? tool : undefined;
-  const activeJobs = useMemo(() => jobsFor({ category, check }), [category, check]);
-  const activeCards = useMemo(() => cardsFor({ category, check }), [category, check]);
+  const skip = useMemo(() => getSetting('skippedChecks') as string[], []);
+  const activeJobs = useMemo(() => jobsFor({ category, check, skip }), [category, check, skip]);
+  const activeCards = useMemo(() => cardsFor({ category, check, skip }), [category, check, skip]);
 
   const { state: jobsState, retry, ipLookupError } = useJobs(address, addressType, activeJobs);
 
@@ -130,7 +132,7 @@ const Results = (props: { address?: string }): JSX.Element => {
 
   const cardsToShow = renderable.filter(({ data, entry }) => hasData(data) && !entry?.error);
 
-  const findings = useMemo(() => runAnalysis(jobsState), [jobsState]);
+  const findings = useMemo(() => runAnalysis(jobsState, activeCards), [jobsState, activeCards]);
 
   // Show the loader until the first few checks have settled
   const settled = loadingJobs.filter((j) => j.state !== 'loading').length;

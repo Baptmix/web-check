@@ -20,7 +20,6 @@ const Trigger = styled.span`
 `;
 
 const Tip = styled.div`
-  --edge: color-mix(in srgb, ${colors.textColor} 18%, transparent);
   --shift: 4px;
   position: fixed;
   inset: auto;
@@ -28,7 +27,7 @@ const Tip = styled.div`
   overflow: visible;
   max-width: min(20rem, calc(100vw - 1rem));
   padding: 0.6rem 0.75rem;
-  border: 1px solid var(--edge);
+  border: 1px solid ${colors.lineStrong};
   border-radius: 6px;
   background: ${colors.backgroundOverlay};
   color: ${colors.textColorSecondary};
@@ -74,7 +73,7 @@ const Tip = styled.div`
     width: 8px;
     height: 8px;
     background: inherit;
-    border: 1px solid var(--edge);
+    border: 1px solid ${colors.lineStrong};
     transform: rotate(45deg);
   }
   &[data-side='top']::before {

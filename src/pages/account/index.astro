@@ -38,13 +38,17 @@ import Footer from '@components/scafold/Footer.astro';
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-image: url('/assets/images/background-dots.svg');
+    background-image: radial-gradient(
+      color-mix(in srgb, var(--border) 30%, transparent) 1.75px,
+      transparent 0
+    );
+    background-size: 30px 30px;
     @include mobile-down {
       padding: 0.5rem;
     }
     .under-development {
       border: 2px solid var(--warning);
-      background: #ffff0012;
+      background: color-mix(in srgb, var(--warning) 7%, transparent);
       padding: 1rem;
       margin: 2rem auto;
       border-radius: 4px;

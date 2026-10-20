@@ -3,6 +3,7 @@ import Row, { type RowProps } from 'client/components/Form/Row';
 import { toStatus, type Status } from 'client/components/misc/Icon';
 import { gradeSeverity } from 'client/analysis/rules/tls-security-audit';
 import { MIN_MAX_AGE } from 'client/analysis/rules/hsts';
+import { formatNumber } from 'client/utils/format';
 import type { TermId } from '@/data/glossary';
 
 const yesNo = (v: any, no: Status = 'error'): RowProps => ({
@@ -35,7 +36,7 @@ const hsts = (policy?: any): RowProps | null => {
   }
   const days = Math.round((policy.maxAge || 0) / 86400);
   const sub = policy.includeSubDomains ? ' + includeSubDomains' : '';
-  const val = `${days} day${days === 1 ? '' : 's'}${sub}`;
+  const val = `${formatNumber(days)} day${days === 1 ? '' : 's'}${sub}`;
   if (policy.maxAge >= MIN_MAX_AGE) return { val, status: 'pass' };
   return { val, status: 'warning', reason: 'Under the one year the HSTS preload list needs' };
 };

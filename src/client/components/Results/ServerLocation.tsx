@@ -4,10 +4,11 @@ import { Card } from 'client/components/Form/Card';
 import LocationMap from 'client/components/misc/LocationMap';
 import Flag from 'client/components/misc/Flag';
 import { TextSizes } from 'client/styles/typography';
+import colors from 'client/styles/colors';
 import Row, { StyledRow } from 'client/components/Form/Row';
 
 const SmallText = styled.span`
-  opacity: 0.5;
+  color: ${colors.textColorTertiary};
   font-size: ${TextSizes.xSmall};
   text-align: right;
   display: block;
