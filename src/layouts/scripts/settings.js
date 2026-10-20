@@ -1,5 +1,6 @@
 (() => {
   const osMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const osContrast = matchMedia('(prefers-contrast: more)');
 
   const read = (key) => {
     try {
@@ -14,6 +15,7 @@
     const { dataset } = doc.documentElement;
     dataset.textSize = read('textSize') ?? 'default';
     dataset.motion = read('reducedMotion') || osMotion.matches ? 'reduce' : 'full';
+    dataset.contrast = read('highContrast') || osContrast.matches ? 'more' : 'normal';
 
     // Plausible won't count visits while this flag is set
     const stats = read('trafficStats');
@@ -26,6 +28,7 @@
   apply();
   document.addEventListener('astro:before-swap', (e) => apply(e.newDocument));
   osMotion.addEventListener('change', () => apply());
+  osContrast.addEventListener('change', () => apply());
   addEventListener('settings-change', () => apply());
   addEventListener('storage', () => apply());
 })();

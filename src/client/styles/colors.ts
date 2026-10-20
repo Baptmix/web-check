@@ -9,6 +9,7 @@ const colors = {
   backgroundRaised: 'var(--background-raised)',
   backgroundOverlay: 'var(--background-overlay)',
   primaryTransparent: 'var(--primary-transparent)',
+  lineStrong: 'var(--line-strong)',
 
   // Action Colors
   info: 'var(--info)',

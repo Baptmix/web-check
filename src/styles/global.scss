@@ -65,6 +65,11 @@ html[data-motion='reduce'] {
   }
 }
 
+/* Bolder focus rings, for high contrast */
+html[data-contrast='more'] :focus-visible {
+  outline: 3px solid var(--primary) !important;
+}
+
 body {
   font-family: var(--font-sans);
   line-height: 1;

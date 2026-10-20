@@ -139,7 +139,7 @@ const layers: Layer[] = [
     padding: 7%;
     transform: translateZ(calc((var(--count) - 1 - var(--i)) * var(--gap)));
     background: color-mix(in srgb, var(--background-raised) 93%, transparent);
-    border: 1px solid color-mix(in srgb, var(--primary) 35%, transparent);
+    border: 1px solid var(--primary-line);
     color: var(--text-color-secondary);
     animation: layer-lift var(--cycle) ease-in-out infinite;
     animation-delay: calc(((var(--i) + 0.5) / var(--count) * 0.75 - 0.1) * var(--cycle));
@@ -168,7 +168,7 @@ const layers: Layer[] = [
     justify-content: space-between;
     gap: 1em;
     padding-bottom: 1.5%;
-    border-bottom: 1px solid color-mix(in srgb, var(--text-color) 10%, transparent);
+    border-bottom: 1px solid var(--line);
     white-space: nowrap;
   }
 

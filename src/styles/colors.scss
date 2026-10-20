@@ -19,6 +19,13 @@
   --warning: #f6f000;
   --error: #fca016;
   --danger: #f80363;
+
+  // See-through lines and fills, which follow the theme's text and primary colors
+  --line: color-mix(in srgb, var(--text-color) 10%, transparent);
+  --line-strong: color-mix(in srgb, var(--text-color) 25%, transparent);
+  --hover: color-mix(in srgb, var(--text-color) 6%, transparent);
+  --primary-tint: color-mix(in srgb, var(--primary) 16%, transparent);
+  --primary-line: color-mix(in srgb, var(--primary) 35%, transparent);
 }
 
 html[data-theme='light'] {
@@ -41,4 +48,23 @@ html[data-theme='light'] {
   --warning: #8a6a00;
   --error: #b45309;
   --danger: #c8004f;
+}
+
+// High contrast, from the OS or the settings menu. Mixes keep it working in both themes
+html[data-contrast='more'] {
+  --text-color-secondary: color-mix(in srgb, var(--text-color) 85%, var(--background));
+  --text-color-tertiary: color-mix(in srgb, var(--text-color) 70%, var(--background));
+  --border: color-mix(in srgb, var(--text-color) 50%, var(--background));
+  --primary-transparent: color-mix(in srgb, var(--primary) 30%, transparent);
+  --line: color-mix(in srgb, var(--text-color) 50%, transparent);
+  --line-strong: color-mix(in srgb, var(--text-color) 75%, transparent);
+  --hover: color-mix(in srgb, var(--text-color) 15%, transparent);
+  --primary-line: var(--primary);
+
+  // Light theme's text and primary are too pale for this, so go darker
+  &[data-theme='light'] {
+    --text-color: #000000;
+    --primary: #036e90;
+    --primary-increased-contrast: #024f68;
+  }
 }

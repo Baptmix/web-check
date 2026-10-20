@@ -114,7 +114,7 @@ export const sections: Section[] = [
         label: 'Error monitoring',
         hint: 'Sends anonymous error reports, so we can fix bugs',
         control: 'toggle',
-        default: true,
+        default: false,
       },
       {
         key: 'trafficStats',
