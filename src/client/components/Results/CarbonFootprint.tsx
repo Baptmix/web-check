@@ -1,22 +1,26 @@
 import { Card, Note } from 'client/components/Form/Card';
 import Row from 'client/components/Form/Row';
+import { formatNumber } from 'client/utils/format';
+
+// Fixed decimals, with the locale's separators
+const fixed = (n: number, digits: number) => formatNumber(n, { digits });
 
 const formatBytes = (n: number): string => {
-  if (n >= 1048576) return `${(n / 1048576).toFixed(2)} MB`;
-  if (n >= 1024) return `${(n / 1024).toFixed(2)} KB`;
-  return `${Math.round(n)} bytes`;
+  if (n >= 1048576) return `${fixed(n / 1048576, 2)} MB`;
+  if (n >= 1024) return `${fixed(n / 1024, 2)} KB`;
+  return `${fixed(n, 0)} bytes`;
 };
 
 const formatGrams = (g: number): string => {
-  if (g >= 1000) return `${(g / 1000).toFixed(2)} kg`;
-  if (g >= 1) return `${g.toFixed(2)} g`;
-  return `${(g * 1000).toFixed(2)} mg`;
+  if (g >= 1000) return `${fixed(g / 1000, 2)} kg`;
+  if (g >= 1) return `${fixed(g, 2)} g`;
+  return `${fixed(g * 1000, 2)} mg`;
 };
 
 const formatKwh = (kwh: number): string => {
-  if (kwh >= 1) return `${kwh.toFixed(3)} kWh`;
-  if (kwh >= 0.001) return `${(kwh * 1000).toFixed(3)} Wh`;
-  return `${(kwh * 1_000_000).toFixed(2)} mWh`;
+  if (kwh >= 1) return `${fixed(kwh, 3)} kWh`;
+  if (kwh >= 0.001) return `${fixed(kwh * 1000, 3)} Wh`;
+  return `${fixed(kwh * 1_000_000, 2)} mWh`;
 };
 
 const CarbonCard = (props: { data: any; title: string; actionButtons: any }): JSX.Element => {

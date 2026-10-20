@@ -3,6 +3,7 @@ import type { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { Card } from 'client/components/Form/Card';
 import Row, { Section, type RowProps } from 'client/components/Form/Row';
 import Icon from 'client/components/misc/Icon';
+import { formatNumber } from 'client/utils/format';
 
 const cardStyles = `
   h4 {
@@ -61,7 +62,7 @@ const verification = (profile: any): RowProps => {
 };
 
 const num = (value: any): string =>
-  typeof value === 'number' ? value.toLocaleString() : String(value);
+  typeof value === 'number' ? formatNumber(value) : String(value);
 
 const SocialPresenceCard = (props: {
   data: any;

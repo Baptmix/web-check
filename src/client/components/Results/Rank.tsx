@@ -2,6 +2,7 @@ import { AreaChart, Area, Tooltip, CartesianGrid, ResponsiveContainer } from 're
 import colors from 'client/styles/colors';
 import { Card } from 'client/components/Form/Card';
 import Row from 'client/components/Form/Row';
+import { formatDate, formatNumber } from 'client/utils/format';
 
 const cardStyles = `
 .rank-average {
@@ -46,7 +47,8 @@ function Chart(chartData: { date: string; uv: number }[], data: any) {
         />
         <Tooltip
           contentStyle={{ background: colors.background, color: colors.textColor, borderRadius: 4 }}
-          labelFormatter={(value) => ['Date : ', data[value as number].date]}
+          labelFormatter={(value) => `Date : ${formatDate(data[value as number].date)}`}
+          formatter={(value) => formatNumber(Number(value))}
         />
         <Area
           type="monotone"
@@ -67,14 +69,14 @@ const RankCard = (props: { data: any; title: string; actionButtons: any }): JSX.
   const chartData = makeChartData(data);
   return (
     <Card heading={props.title} actionButtons={props.actionButtons} styles={cardStyles}>
-      <div className="rank-average">{data[0].rank.toLocaleString()}</div>
+      <div className="rank-average">{formatNumber(data[0].rank)}</div>
       {percentageChange != null && (
         <Row
           lbl="Change since Yesterday"
-          val={`${percentageChange > 0 ? '+' : ''} ${percentageChange.toFixed(2)}%`}
+          val={`${formatNumber(percentageChange, { digits: 2, signDisplay: 'exceptZero' })}%`}
         />
       )}
-      <Row lbl="Historical Average Rank" val={average.toLocaleString()} />
+      <Row lbl="Historical Average Rank" val={formatNumber(average)} />
       <div className="chart-container">{Chart(chartData, data)}</div>
     </Card>
   );

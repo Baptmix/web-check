@@ -4,6 +4,7 @@ import colors from 'client/styles/colors';
 import Heading from 'client/components/Form/Heading';
 import { StatusIcon, type Status } from 'client/components/misc/Icon';
 import Tooltip from 'client/components/misc/Tooltip';
+import { formatDate } from 'client/utils/format';
 import { termText, type TermId } from '@/data/glossary';
 
 export interface RowProps {
@@ -131,14 +132,6 @@ const isDateLike = (value: any): boolean => {
   const date = new Date(value);
   if (isNaN(date.getTime())) return false;
   return date >= new Date('1995-01-01') && date <= new Date('2030-12-31');
-};
-
-const formatDate = (dateString: string): string => {
-  return new Intl.DateTimeFormat('en-GB', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  }).format(new Date(dateString));
 };
 
 // The text shown for a value, with dates formatted and booleans as yes or no

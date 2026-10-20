@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import colors from 'client/styles/colors';
 import Card from 'client/components/Form/Card';
 import Heading from 'client/components/Form/Heading';
+import { formatNumber } from 'client/utils/format';
 
 export type LoadingState = 'success' | 'loading' | 'skipped' | 'error' | 'timed-out';
 
@@ -333,7 +334,7 @@ const LoadSummary = ({ jobs, elapsedMs, onOpen }: LoadSummaryProps): ReactNode =
   const total = jobs.length;
   const c = countByState(jobs);
   const issues = c.error + c['timed-out'] + c.skipped;
-  const sec = (elapsedMs / 1000).toFixed(1);
+  const sec = formatNumber(elapsedMs / 1000, { digits: 1 });
   const text = c.loading
     ? `Loading ${total - c.loading} of ${total}` + (elapsedMs < 15000 ? ` (${sec}s)` : '')
     : `Finished ${total} lookups in ${sec}s`;
@@ -372,7 +373,8 @@ const SummaryText = ({ jobs, elapsedMs }: SummaryTextProps): ReactNode => {
   const c = countByState(jobs);
   const isDone = c.loading === 0;
   const hasIssues = c.error > 0 || c['timed-out'] > 0;
-  const elapsed = elapsedMs >= 10_000 ? `${(elapsedMs / 1000).toFixed(1)} s` : `${elapsedMs} ms`;
+  const seconds = formatNumber(elapsedMs / 1000, { digits: 1 });
+  const elapsed = elapsedMs >= 10_000 ? `${seconds} s` : `${elapsedMs} ms`;
   const chip = (k: ChipKey) =>
     c[k] > 0 && (
       <span key={k} className={k}>

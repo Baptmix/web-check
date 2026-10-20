@@ -1,5 +1,6 @@
 import { Card, Note } from 'client/components/Form/Card';
 import Row from 'client/components/Form/Row';
+import { formatNumber } from 'client/utils/format';
 
 const ArchivesCard = (props: { data: any; title: string; actionButtons: any }): JSX.Element => {
   const data = props.data;
@@ -10,7 +11,10 @@ const ArchivesCard = (props: { data: any; title: string; actionButtons: any }): 
       <Row lbl="Days Archived" val={data.daysArchived} />
       <Row lbl="Change Count" val={data.changeCount} />
       <Row lbl="Avg Size" val={`${data.averagePageSize} bytes`} />
-      <Row lbl="Avg Days between Archives" val={data.scanFrequency.daysBetweenScans} />
+      <Row
+        lbl="Avg Days between Archives"
+        val={formatNumber(data.scanFrequency.daysBetweenScans)}
+      />
 
       <Note>
         View historical versions of this page{' '}
