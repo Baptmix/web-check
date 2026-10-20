@@ -6,10 +6,13 @@ interface Props {
 }
 
 const { name } = Astro.props;
+
+// get-ip has no card of its own, and other checks need it
+const skippable = checkIds.filter((id) => id !== 'get-ip');
 ---
 
 <ul>
-  {checkIds.map((id) => (
+  {skippable.map((id) => (
     <li>
       <label>
         <input type="checkbox" name={name} value={id} />
