@@ -48,19 +48,17 @@ type Props = Omit<HTMLAttributes<'input'>, 'type'>;
       }
     }
 
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
     &:focus {
       outline: none;
     }
     &:focus-visible {
       outline: 2px solid var(--primary);
       outline-offset: 2px;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .toggle,
-    .toggle::before {
-      transition: none;
     }
   }
 </style>

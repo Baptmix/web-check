@@ -1,7 +1,8 @@
 ---
 import { ClientRouter } from 'astro:transitions';
 import MetaTags from '@layouts/MetaTags.astro';
-import ThemeScript from '@layouts/ThemeScript.astro';
+import themeScript from '@layouts/scripts/theme.js?raw';
+import settingsScript from '@layouts/scripts/settings.js?raw';
 
 import '@styles/typography.scss';
 import '@styles/global.scss';
@@ -26,7 +27,8 @@ const { preloadBodyFont = true } = Astro.props;
 <!doctype html>
 <html lang="en" data-theme="dark">
   <head>
-    <ThemeScript />
+    <script is:inline set:html={themeScript} />
+    <script is:inline set:html={settingsScript} />
     <ClientRouter />
     <MetaTags {...Astro.props} />
     <slot name="head" />

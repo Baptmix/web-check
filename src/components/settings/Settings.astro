@@ -38,20 +38,23 @@ import { sections } from '@/data/settings';
     clearAllData,
     defaults,
     getSetting,
+    isForced,
     isSetting,
     setSetting,
   } from '../../client/utils/settings';
 
   type Field = HTMLInputElement | HTMLSelectElement;
 
-  // Show whatever's saved, or the default if nothing is
+  // Show whatever's saved, or the default if nothing is. The OS can lock some toggles on
   const fill = (form: HTMLFormElement) => {
     for (const field of form.querySelectorAll<Field>('[name]')) {
       if (!isSetting(field.name)) continue;
       const value = getSetting(field.name);
+      field.disabled = isForced(field.name);
       if (field instanceof HTMLSelectElement) field.value = `${value}`;
       else if (Array.isArray(value)) field.checked = value.includes(field.value);
-      else field.checked = field.type === 'radio' ? field.value === value : value === true;
+      else if (field.type === 'radio') field.checked = field.value === value;
+      else field.checked = value === true || field.disabled;
     }
   };
 
@@ -253,14 +256,5 @@ import { sections } from '@/data/settings';
   :global(html:has(.settings-dialog[open])) {
     overflow: hidden;
     scrollbar-gutter: stable;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .icon-button,
-    .icon-button :global(svg),
-    .settings-dialog,
-    .settings-dialog::backdrop {
-      transition: none;
-    }
   }
 </style>

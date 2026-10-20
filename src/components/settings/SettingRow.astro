@@ -9,7 +9,7 @@ import SkippedChecks from '@components/settings/SkippedChecks.astro';
 
 type Props = Setting;
 
-const { key, label, hint, control, options = [], button } = Astro.props;
+const { key, label, hint, control, options = [], button, media } = Astro.props;
 
 const id = `setting-${key}`;
 const hintId = hint && `${id}-hint`;
@@ -29,6 +29,7 @@ const Label = hasField ? 'label' : 'span';
       {hint && (
         <span class="hint" id={hintId}>
           {hint}
+          {media && <span class="forced">Turned on in your device settings</span>}
         </span>
       )}
     </span>
@@ -84,6 +85,14 @@ const Label = hasField ? 'label' : 'span';
   .hint {
     font-size: 0.85rem;
     color: var(--text-color-secondary);
+  }
+
+  // Only shows once the OS has locked the toggle on
+  .forced {
+    display: none;
+  }
+  .row:has(:disabled) .forced {
+    display: block;
   }
 
   summary {
@@ -144,13 +153,6 @@ const Label = hasField ? 'label' : 'span';
     &:focus-visible {
       outline: 2px solid var(--primary);
       outline-offset: 2px;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .count :global(svg),
-    .action {
-      transition: none;
     }
   }
 </style>

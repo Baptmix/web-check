@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import styled from '@emotion/styled';
 
 // Global Animation Configuration Constants
@@ -23,6 +23,9 @@ const MeteorContainer = styled(motion.div)`
   border-radius: 50%;
   background-color: var(--primary);
   top: 1px;
+  html[data-motion='reduce'] & {
+    display: none;
+  }
 `;
 
 const Tail = styled(motion.div)`
@@ -95,7 +98,6 @@ const WebCheckHomeBackground = ({ opacity }: { opacity?: number }) => {
   const [gridSizeX, setGridSizeX] = useState(Math.floor(window.innerWidth / dotSpacing));
   const [gridSizeY, setGridSizeY] = useState(Math.floor(window.innerHeight / dotSpacing));
   const [meteors, setMeteors] = useState(() => generateInitialMeteors(gridSizeX, gridSizeY));
-  const reduceMotion = useReducedMotion();
 
   const handleAnimationComplete = (id: number) => {
     setMeteors((current) =>
@@ -150,40 +152,39 @@ const WebCheckHomeBackground = ({ opacity }: { opacity?: number }) => {
         <StyledRect fill="url(#dot-pattern)" />
       </StyledSvg>
 
-      {!reduceMotion &&
-        meteors.map(({ id, column, startRow, endRow, duration, tailVisible, animationStage }) => {
-          return (
-            <MeteorContainer
-              key={id}
-              initial={{
-                x: column * dotSpacing,
-                y: startRow * dotSpacing,
-                opacity: 1,
-              }}
+      {meteors.map(({ id, column, startRow, endRow, duration, tailVisible, animationStage }) => {
+        return (
+          <MeteorContainer
+            key={id}
+            initial={{
+              x: column * dotSpacing,
+              y: startRow * dotSpacing,
+              opacity: 1,
+            }}
+            animate={{
+              opacity: tailVisible ? 1 : 0,
+              y: animationStage === 'resetting' ? startRow * dotSpacing : endRow * dotSpacing,
+            }}
+            transition={{
+              duration: animationStage === 'resetting' ? 0 : duration,
+              ease: headEasing,
+            }}
+            onAnimationComplete={() => handleAnimationComplete(id)}
+          >
+            <Tail
+              initial={{ top: `-${tailLength}px`, height: `${tailLength}px` }}
               animate={{
-                opacity: tailVisible ? 1 : 0,
-                y: animationStage === 'resetting' ? startRow * dotSpacing : endRow * dotSpacing,
+                top: tailVisible ? `-${tailLength}px` : 0,
+                height: tailVisible ? `${tailLength}px` : 0,
               }}
               transition={{
-                duration: animationStage === 'resetting' ? 0 : duration,
-                ease: headEasing,
+                duration: tailDuration,
+                ease: tailEasing,
               }}
-              onAnimationComplete={() => handleAnimationComplete(id)}
-            >
-              <Tail
-                initial={{ top: `-${tailLength}px`, height: `${tailLength}px` }}
-                animate={{
-                  top: tailVisible ? `-${tailLength}px` : 0,
-                  height: tailVisible ? `${tailLength}px` : 0,
-                }}
-                transition={{
-                  duration: tailDuration,
-                  ease: tailEasing,
-                }}
-              />
-            </MeteorContainer>
-          );
-        })}
+            />
+          </MeteorContainer>
+        );
+      })}
     </div>
   );
 };

@@ -28,9 +28,41 @@
 
 /* HTML and body basic setup */
 html {
-  font-size: 16px;
+  --text-scale: 1;
+  font-size: calc(16px * var(--text-scale));
   scroll-behavior: smooth;
   scrollbar-color: color-mix(in srgb, var(--primary) 25%, transparent) transparent;
+
+  // Text size, from the settings menu
+  &[data-text-size='small'] {
+    --text-scale: 0.875;
+  }
+  &[data-text-size='large'] {
+    --text-scale: 1.125;
+  }
+  &[data-text-size='larger'] {
+    --text-scale: 1.25;
+  }
+}
+
+/* Less motion, when the OS or the settings menu asks for it */
+html[data-motion='reduce'] {
+  &,
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  // Kept apart, so browsers without view transitions don't drop the rule above
+  &::view-transition-group(*),
+  &::view-transition-old(*),
+  &::view-transition-new(*) {
+    animation: none !important;
+  }
 }
 
 body {
@@ -119,7 +151,7 @@ select {
 
 @media (max-width: 768px) {
   html {
-    font-size: 14px;
+    font-size: calc(14px * var(--text-scale));
   }
 }
 

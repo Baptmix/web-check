@@ -94,9 +94,10 @@ const { label = 'Analyze URL' } = Astro.props;
 </style>
 
 <script>
+  import { reducedMotion } from '../../client/utils/settings';
+
   const duration = 3500;
   const canAnimateAngle = typeof CSS !== 'undefined' && 'registerProperty' in CSS;
-  const stillMotion = matchMedia('(prefers-reduced-motion: reduce)');
 
   // Browsers without @property can't tween --angle in CSS, so drive it by hand
   const rotateBorder = (button: HTMLElement) => {
@@ -109,7 +110,7 @@ const { label = 'Analyze URL' } = Astro.props;
   };
 
   document.addEventListener('astro:page-load', () => {
-    if (canAnimateAngle || stillMotion.matches) return;
+    if (canAnimateAngle || reducedMotion()) return;
     document.querySelectorAll<HTMLElement>('.button').forEach((button) => {
       if (button.dataset.rotating) return;
       button.dataset.rotating = 'true';

@@ -12,7 +12,7 @@ export interface Setting {
   control: 'theme' | 'select' | 'segmented' | 'toggle' | 'checks' | 'action';
   options?: Option[];
   default?: string | boolean | string[];
-  media?: string; // Follows this media query until the user picks
+  media?: string; // When this media query matches, the OS has it on and it stays on
   button?: string;
 }
 

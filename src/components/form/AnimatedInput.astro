@@ -42,6 +42,8 @@ const placeholders = [
 </div>
 
 <script>
+  import { reducedMotion } from '../../client/utils/settings';
+
   const cycleTime = 3000;
 
   // Cycle the example URLs behind one input, pausing while it holds a value
@@ -56,6 +58,7 @@ const placeholders = [
     let interval: ReturnType<typeof setInterval>;
 
     const showNext = () => {
+      if (reducedMotion()) return;
       starter.classList.remove('hide');
       placeholders.forEach((el, position) => {
         el.classList.toggle('active', position === index);
@@ -91,7 +94,7 @@ const placeholders = [
 
   // Leaving the animation unstarted keeps the input's own static placeholder
   document.addEventListener('astro:page-load', () => {
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (reducedMotion()) return;
     document.querySelectorAll<HTMLElement>('.input-container').forEach((container) => {
       if (container.dataset.animated) return;
       container.dataset.animated = 'true';

@@ -112,12 +112,4 @@ const { label, name, options, value, class: className } = Astro.props;
       outline-offset: 2px;
     }
   }
-
-  @media (prefers-reduced-motion: reduce) {
-    .segmented::before,
-    label,
-    label :global(svg) {
-      transition: none;
-    }
-  }
 </style>
