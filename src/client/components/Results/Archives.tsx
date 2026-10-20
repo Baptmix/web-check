@@ -8,9 +8,9 @@ const ArchivesCard = (props: { data: any; title: string; actionButtons: any }): 
     <Card heading={props.title} actionButtons={props.actionButtons}>
       <Row lbl="First Scan" val={data.firstScan} />
       <Row lbl="Last Scan" val={data.lastScan} />
-      <Row lbl="Days Archived" val={data.daysArchived} />
-      <Row lbl="Change Count" val={data.changeCount} />
-      <Row lbl="Avg Size" val={`${data.averagePageSize} bytes`} />
+      <Row lbl="Days Archived" val={formatNumber(data.daysArchived)} />
+      <Row lbl="Change Count" val={formatNumber(data.changeCount)} />
+      <Row lbl="Avg Size" val={`${formatNumber(data.averagePageSize)} bytes`} />
       <Row
         lbl="Avg Days between Archives"
         val={formatNumber(data.scanFrequency.daysBetweenScans)}

@@ -1,5 +1,6 @@
 import type { Analyzer } from '../types';
 import { daysUntil } from '../helpers';
+import { formatNumber } from 'client/utils/format';
 
 // Warn when a domain is close to expiring so renewal can happen on time
 const domainInfo: Analyzer = (d) => {
@@ -10,7 +11,7 @@ const domainInfo: Analyzer = (d) => {
       {
         severity: 'critical',
         title: 'Domain registration expired',
-        detail: `Expired ${-days} day(s) ago, renew before it drops`,
+        detail: `Expired ${formatNumber(-days)} day(s) ago, renew before it drops`,
       },
     ];
   }

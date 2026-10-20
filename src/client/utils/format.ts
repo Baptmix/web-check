@@ -16,16 +16,18 @@ const calendar = 'gregory';
 
 type NumberOptions = Intl.NumberFormatOptions & { digits?: number };
 
-// Like 1,234.5 or 1.234,5. Set digits for a fixed number of decimals, like toFixed
-export const formatNumber = (value: number, { digits, ...options }: NumberOptions = {}) =>
-  new Intl.NumberFormat(locale(), {
+// Like 1,420.5 or 6.967,5. Set digits for a fixed number of decimals, like toFixed
+export const formatNumber = (value: number, { digits, ...options }: NumberOptions = {}) => {
+  if (value == null || isNaN(value)) return '';
+  return new Intl.NumberFormat(locale(), {
     numberingSystem,
     minimumFractionDigits: digits,
     maximumFractionDigits: digits,
     ...options,
   }).format(value);
+};
 
-// Like 5 May 2024. API dates are UTC, so showing them in local time could slip a day
+// Like 5 May 2024. API dates are UTC, becos London is center of the world
 export const formatDate = (value: string | number | Date) => {
   const date = new Date(value);
   if (isNaN(date.getTime())) return String(value);

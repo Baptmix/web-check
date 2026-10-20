@@ -1,6 +1,7 @@
 import { Card } from 'client/components/Form/Card';
 import Row from 'client/components/Form/Row';
 import { MIN_MAX_AGE, parseHsts } from 'client/analysis/rules/hsts';
+import { formatNumber } from 'client/utils/format';
 
 const HstsCard = (props: { data: any; title: string; actionButtons: any }): JSX.Element => {
   const { hstsHeader, message } = props.data;
@@ -13,9 +14,9 @@ const HstsCard = (props: { data: any; title: string; actionButtons: any }): JSX.
         <>
           <Row
             lbl="max-age"
-            val={`${days} day${days === 1 ? '' : 's'}`}
+            val={`${formatNumber(days)} day${days === 1 ? '' : 's'}`}
             status={maxAge >= MIN_MAX_AGE ? 'pass' : 'warning'}
-            title={`${maxAge} seconds`}
+            title={`${formatNumber(maxAge)} seconds`}
             term="hsts-max-age"
           />
           <Row

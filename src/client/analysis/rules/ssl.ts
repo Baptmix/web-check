@@ -1,5 +1,6 @@
 import type { Analyzer, Result } from '../types';
 import { daysUntil } from '../helpers';
+import { formatNumber } from 'client/utils/format';
 
 // Plain reasons for the validation errors sites most often get
 export const REASONS: Record<string, string> = {
@@ -18,7 +19,7 @@ export const checkExpiry = (validTo: unknown): Result | null => {
     return {
       severity: 'critical',
       title: 'SSL certificate expired',
-      detail: `Expired ${-days} day(s) ago`,
+      detail: `Expired ${formatNumber(-days)} day(s) ago`,
     };
   }
   if (days <= 7) {

@@ -1,6 +1,7 @@
 import { Card } from 'client/components/Form/Card';
 import Row, { ExpandableRow, Section } from 'client/components/Form/Row';
 import { getPath } from 'client/utils/result-processor';
+import { formatNumber } from 'client/utils/format';
 
 const convertToDate = (dateString: string): string => {
   const [date, time] = dateString.split(' ');
@@ -68,7 +69,7 @@ const MalwareCard = (props: { data: any; title: string; actionButtons: any }): J
         <>
           <Row lbl="Status" val="Malware Identified" status="error" term="malware" />
           <Row lbl="First Seen" val={convertToDate(urlHaus.firstseen)} />
-          <Row lbl="Bad URLs Count" val={urlHaus.url_count} />
+          <Row lbl="Bad URLs Count" val={formatNumber(urlHaus.url_count)} />
         </>
       )}
       {urlHaus.urls && (
@@ -83,7 +84,8 @@ const MalwareCard = (props: { data: any; title: string; actionButtons: any }): J
               {
                 lbl: 'Takedown Time',
                 val:
-                  urlResult.takedown_time_seconds && `${urlResult.takedown_time_seconds} seconds`,
+                  urlResult.takedown_time_seconds &&
+                  `${formatNumber(urlResult.takedown_time_seconds)} seconds`,
               },
               { lbl: 'Larted', val: urlResult.larted },
               { lbl: 'Tags', val: (urlResult.tags || []).join(', ') },

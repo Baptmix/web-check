@@ -305,7 +305,7 @@ const JobListItem = ({ job, showJobDocs, showErrorModal }: JobListItemProps): Re
         {STATE_META[state].emoji} {name}
       </button>
       <StateLabel color={STATE_META[state].color}> ({state})</StateLabel>
-      <i>{timeTaken && state !== 'loading' ? ` Took ${timeTaken} ms` : ''}</i>
+      <i>{timeTaken && state !== 'loading' ? ` Took ${formatNumber(timeTaken)} ms` : ''}</i>
       {canRetry && (
         <FailedJobActionButton type="button" onClick={retry}>
           ↻ Retry
@@ -374,7 +374,7 @@ const SummaryText = ({ jobs, elapsedMs }: SummaryTextProps): ReactNode => {
   const isDone = c.loading === 0;
   const hasIssues = c.error > 0 || c['timed-out'] > 0;
   const seconds = formatNumber(elapsedMs / 1000, { digits: 1 });
-  const elapsed = elapsedMs >= 10_000 ? `${seconds} s` : `${elapsedMs} ms`;
+  const elapsed = elapsedMs >= 10_000 ? `${seconds} s` : `${formatNumber(elapsedMs)} ms`;
   const chip = (k: ChipKey) =>
     c[k] > 0 && (
       <span key={k} className={k}>
@@ -428,7 +428,8 @@ const ProgressLoader = ({ loadStatus, showModal, showJobDocs }: ProgressLoaderPr
         <Heading as="h3">Details for {job.name}</Heading>
         <p>
           The {job.name} job ended with state '{job.state}'
-          {job.timeTaken !== undefined ? ` after ${job.timeTaken} ms` : ''}. {detailsLabel}
+          {job.timeTaken !== undefined ? ` after ${formatNumber(job.timeTaken)} ms` : ''}.{' '}
+          {detailsLabel}
         </p>
         <pre className={isInfo ? 'info' : 'error'}>{job.error}</pre>
       </ErrorModalContent>,
