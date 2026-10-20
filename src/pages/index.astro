@@ -5,6 +5,7 @@ import TempDisabled from '@/components/homepage/TempDisabled.astro';
 import HomeBackground from '@/components/homepage/HomeBackground';
 import AboutSection from '@/components/homepage/AboutSection.astro';
 import Footer from '@components/scafold/Footer.astro';
+import Settings from '@components/settings/Settings.astro';
 
 const isBossServer = import.meta.env.BOSS_SERVER === 'true';
 
@@ -17,6 +18,9 @@ const disableEverything = import.meta.env.VITE_DISABLE_EVERYTHING === true;
   </Fragment>
   {disableEverything && <TempDisabled />}
   <main>
+    <div class="corner">
+      <Settings />
+    </div>
     <HeroForm />
     <AboutSection />
   </main>
@@ -35,5 +39,11 @@ const disableEverything = import.meta.env.VITE_DISABLE_EVERYTHING === true;
     @include tablet-landscape-down {
       width: 96vw;
     }
+  }
+  .corner {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    z-index: 6;
   }
 </style>

@@ -4,7 +4,7 @@ import Footer from '@components/scafold/Footer.astro';
 import HomeBackground from '@components/homepage/HomeBackground';
 import ScanForm from '@components/form/ScanForm.astro';
 import SponsorCard from '@components/molecules/SponsorCard.astro';
-import ThemeSwitcher from '@components/molecules/ThemeSwitcher.astro';
+import Settings from '@components/settings/Settings.astro';
 import Logo from '@components/molecules/Logo.astro';
 import { normalizeAddress } from '../../client/utils/address-type-checker';
 import { isCategory } from '@/data/categories';
@@ -34,7 +34,7 @@ if (redirectPath) return Astro.redirect(redirectPath);
         <Logo />
         Web <em>Check</em>
       </h1>
-      <ThemeSwitcher />
+      <Settings />
     </header>
     <ScanForm label="Enter a URL" showCategories />
     <div>

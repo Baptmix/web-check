@@ -36,6 +36,9 @@
     moon: solidIcons.faMoon,
     sun,
     desktop: solidIcons.faDesktop,
+    gear: solidIcons.faGear,
+    xmark: solidIcons.faXmark,
+    font: solidIcons.faFont,
   };
 
   export let name: string;
