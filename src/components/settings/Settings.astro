@@ -45,6 +45,12 @@ import { sections } from '@/data/settings';
 
   type Field = HTMLInputElement | HTMLSelectElement;
 
+  const countSkipped = (form: HTMLFormElement) => {
+    const count = form.querySelector('.skipped-count');
+    const total = new FormData(form).getAll('skippedChecks').length;
+    if (count) count.textContent = `${total || 'None'} skipped`;
+  };
+
   // Show whatever's saved, or the default if nothing is. The OS can lock some toggles on
   const fill = (form: HTMLFormElement) => {
     for (const field of form.querySelectorAll<Field>('[name]')) {
@@ -56,6 +62,7 @@ import { sections } from '@/data/settings';
       else if (field.type === 'radio') field.checked = field.value === value;
       else field.checked = value === true || field.disabled;
     }
+    countSkipped(form);
   };
 
   // Read a field back in the same shape as its default
@@ -64,12 +71,6 @@ import { sections } from '@/data/settings';
     if (Array.isArray(defaults[name])) return data.getAll(name) as string[];
     if (typeof defaults[name] === 'boolean') return data.has(name);
     return data.get(name) as string;
-  };
-
-  const countSkipped = (form: HTMLFormElement) => {
-    const count = form.querySelector('.skipped-count');
-    const total = new FormData(form).getAll('skippedChecks').length;
-    if (count) count.textContent = `${total || 'None'} skipped`;
   };
 
   // Wiping everything takes a second click, in case the first was a slip
@@ -93,7 +94,9 @@ import { sections } from '@/data/settings';
     if (!form || form.dataset.bound) return;
     form.dataset.bound = 'true';
     fill(form);
-    countSkipped(form);
+
+    // Refill on each open, as the OS or another tab may have changed things since
+    form.closest('dialog')?.addEventListener('command', () => fill(form));
 
     form.addEventListener('change', ({ target }) => {
       const { name } = target as Field;

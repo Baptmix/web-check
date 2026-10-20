@@ -45,7 +45,12 @@ export const Card = (props: CardProps): JSX.Element => {
       <StyledCard styles={styles}>
         {actionButtons && actionButtons}
         {heading && (
-          <Heading className="inner-heading" as="h3" align="left" color={colors.primary}>
+          <Heading
+            className="inner-heading"
+            as="h3"
+            align="left"
+            color={colors.primaryIncreasedContrast}
+          >
             {heading}
           </Heading>
         )}
