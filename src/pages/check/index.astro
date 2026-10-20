@@ -5,6 +5,7 @@ import HomeBackground from '@components/homepage/HomeBackground';
 import ScanForm from '@components/form/ScanForm.astro';
 import SponsorCard from '@components/molecules/SponsorCard.astro';
 import ThemeSwitcher from '@components/molecules/ThemeSwitcher.astro';
+import Logo from '@components/molecules/Logo.astro';
 import { normalizeAddress } from '../../client/utils/address-type-checker';
 import { isCategory } from '@/data/categories';
 import { checks, checkIds, isCheck } from '@/data/checks';
@@ -30,7 +31,7 @@ if (redirectPath) return Astro.redirect(redirectPath);
   <div class="home">
     <header>
       <h1>
-        <img src="/favicon.svg" alt="" width="48" height="48" />
+        <Logo />
         Web <em>Check</em>
       </h1>
       <ThemeSwitcher />
@@ -83,8 +84,8 @@ if (redirectPath) return Astro.redirect(redirectPath);
       font-size: clamp(2.25rem, 6vw, 3.5rem);
       color: var(--primary);
 
-      img {
-        width: 1em;
+      :global(.logo) {
+        color: var(--text-color);
       }
 
       em {
@@ -97,7 +98,7 @@ if (redirectPath) return Astro.redirect(redirectPath);
       font-size: 0.85rem;
       letter-spacing: 0.05em;
       text-transform: uppercase;
-      color: var(--primary);
+      color: var(--primary-increased-contrast);
     }
 
     ul {
@@ -118,7 +119,7 @@ if (redirectPath) return Astro.redirect(redirectPath);
 
         &:hover,
         &:focus-visible {
-          color: var(--primary);
+          color: var(--primary-increased-contrast);
         }
       }
     }

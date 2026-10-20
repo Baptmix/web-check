@@ -6,7 +6,7 @@ import Heading from 'client/components/Form/Heading';
 import colors from 'client/styles/colors';
 
 export const StyledCard = styled.section<{ styles?: string }>`
-  background: ${colors.backgroundLighter};
+  background: ${colors.backgroundRaised};
   color: ${colors.textColor};
   border: 1px solid ${colors.primaryTransparent};
   border-radius: 4px;
@@ -25,9 +25,9 @@ export const StyledCard = styled.section<{ styles?: string }>`
 export const Note = styled.small`
   display: block;
   margin-top: 0.75rem;
-  opacity: 0.5;
+  color: ${colors.textColorTertiary};
   a {
-    color: ${colors.primary};
+    color: ${colors.primaryIncreasedContrast};
   }
 `;
 

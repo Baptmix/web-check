@@ -72,10 +72,10 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
     console.error(
       `%cCritical Error%c\n\nRoute or component failed to mount%c:%c\n` +
         `Error Details:\n${error}\n\n${JSON.stringify(errorInfo || {})}`,
-      `background: ${colors.danger}; color:${colors.backgroundDarker}; padding: 4px 8px; font-size: 16px;`,
-      `font-weight: bold; color: ${colors.danger};`,
-      `color: ${colors.danger};`,
-      `color: ${colors.warning};`,
+      `background: #f80363; color: #000; padding: 4px 8px; font-size: 16px;`,
+      `font-weight: bold; color: #f80363;`,
+      `color: #f80363;`,
+      `color: #f6f000;`,
     );
   }
 

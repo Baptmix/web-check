@@ -12,7 +12,7 @@ const cardStyles = `
   }
   .cves a {
     color: ${colors.textColor};
-    &:hover { color: ${colors.primary} }
+    &:hover { color: ${colors.primaryIncreasedContrast} }
   }
   b { color: ${colors.danger} }
   small { color: ${colors.textColorSecondary} }

@@ -22,7 +22,7 @@
 }
 
 ::selection {
-  background: var(--primary);
+  background: var(--primary-increased-contrast);
   color: var(--background);
 }
 
@@ -173,7 +173,7 @@ p {
 }
 
 a {
-  color: var(--primary);
+  color: var(--primary-increased-contrast);
   text-decoration: none;
   &:hover {
     text-decoration: underline;

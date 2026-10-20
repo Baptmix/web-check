@@ -8,9 +8,14 @@ svg.rsm-svg {
 }
 
 :root {
-  --toastify-color-dark: #111927 !important;
-  --toastify-color-info: #04e4f4 !important;
-  --toastify-color-success: #20e253 !important;
-  --toastify-color-warning: #f6f000 !important;
-  --toastify-color-error: #f80363 !important;
+  --toastify-color-dark: var(--background-overlay) !important;
+  --toastify-text-color-dark: var(--text-color) !important;
+  --toastify-color-info: var(--info) !important;
+  --toastify-color-success: var(--success) !important;
+  --toastify-color-warning: var(--warning) !important;
+  --toastify-color-error: var(--danger) !important;
+}
+
+.Toastify__toast .Toastify__close-button {
+  color: var(--text-color);
 }

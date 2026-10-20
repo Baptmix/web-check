@@ -100,14 +100,14 @@ const { tool, label, buttonLabel = 'Analyze', showCategories = false } = Astro.p
     .toggle {
       flex: none;
       padding: 0 1rem;
-      border-left: 2px solid var(--text-color-thirdly);
+      border-left: 2px solid var(--text-color-tertiary);
       anchor-name: --scan-categories;
 
       &:hover,
       &:focus,
       &:focus-visible {
         background: var(--primary-transparent);
-        color: var(--primary);
+        color: var(--primary-increased-contrast);
       }
     }
 
@@ -139,7 +139,7 @@ const { tool, label, buttonLabel = 'Analyze', showCategories = false } = Astro.p
         &:hover,
         &:focus-visible {
           background: var(--primary-transparent);
-          color: var(--primary);
+          color: var(--primary-increased-contrast);
         }
       }
     }

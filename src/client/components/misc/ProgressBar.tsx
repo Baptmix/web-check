@@ -20,7 +20,7 @@ const STATE_META: Record<LoadingState, { emoji: string; color: string }> = {
   loading: { emoji: '🔄', color: colors.info },
   error: { emoji: '❌', color: colors.danger },
   'timed-out': { emoji: '⏸️', color: colors.warning },
-  skipped: { emoji: '⏭️', color: colors.neutral },
+  skipped: { emoji: '⏭️', color: colors.textColorTertiary },
 };
 
 // Tally jobs by their loading state in a single pass
@@ -77,7 +77,7 @@ const Collapsible = styled.div`
 const ProgressBarContainer = styled.div`
   width: 100%;
   height: 0.5rem;
-  background: ${colors.bgShadowColor};
+  background: ${colors.backgroundSunken};
   border-radius: 4px;
   overflow: hidden;
 `;
@@ -131,7 +131,7 @@ const Details = styled.details`
         cursor: pointer;
         &:hover,
         &:focus-visible {
-          color: ${colors.primary};
+          color: ${colors.primaryIncreasedContrast};
           outline: none;
         }
       }
@@ -142,13 +142,12 @@ const Details = styled.details`
   }
   p.error {
     margin: 0.5rem 0;
-    opacity: 0.75;
     color: ${colors.danger};
   }
 `;
 
 const AboutPageLink = styled.a`
-  color: ${colors.primary};
+  color: ${colors.primaryIncreasedContrast};
 `;
 
 const SummaryContainer = styled.div`
@@ -208,7 +207,7 @@ const ReShowRow = styled.div`
       &:hover,
       &:focus-visible {
         text-decoration: underline;
-        color: ${colors.primary};
+        color: ${colors.primaryIncreasedContrast};
         outline: none;
       }
     }
@@ -217,7 +216,7 @@ const ReShowRow = styled.div`
 
 // Re-open trigger styled to match the site's outlined buttons
 const ShowLoadStateButton = styled.button`
-  background: ${colors.backgroundLighter};
+  background: ${colors.backgroundRaised};
   color: ${colors.textColor};
   border: 1px solid ${colors.primaryTransparent};
   padding: 0.3rem 0.7rem;
@@ -231,7 +230,7 @@ const ShowLoadStateButton = styled.button`
     color 0.2s ease-in-out;
   &:hover,
   &:focus-visible {
-    color: ${colors.primary};
+    color: ${colors.primaryIncreasedContrast};
     border-color: ${colors.primary};
     outline: none;
   }
@@ -250,7 +249,7 @@ const DismissButton = styled.button`
   font-family: var(--font-mono);
   cursor: pointer;
   &:hover {
-    color: ${colors.primary};
+    color: ${colors.primaryIncreasedContrast};
   }
 `;
 
@@ -265,7 +264,7 @@ const FailedJobActionButton = styled.button`
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   &:hover {
-    color: ${colors.primary};
+    color: ${colors.primaryIncreasedContrast};
     border-color: ${colors.primary};
   }
 `;

@@ -13,7 +13,10 @@
     height: 100vh;
     z-index: -1;
     pointer-events: none;
-    background-image: radial-gradient(rgba(100, 100, 100, 0.5) 2px, transparent 2px);
+    background-image: radial-gradient(
+      color-mix(in srgb, var(--text-color) 16%, transparent) 2px,
+      transparent 2px
+    );
     background-size: 32px 32px;
     background-position: -1px -1px;
     mask-image: radial-gradient(circle at center top, #000, transparent 75%);

@@ -62,7 +62,7 @@ const { cards, numbered = false } = Astro.props;
       border-radius: 4px;
       border: 1px solid var(--primary-transparent);
       .option {
-        color: var(--primary);
+        color: var(--primary-increased-contrast);
         font-size: 0.8rem;
       }
       h3 {
@@ -104,11 +104,11 @@ const { cards, numbered = false } = Astro.props;
     }
   }
   .shaddow {
-    --c0: #f4ffc7;
-    --c1: #d6fb41;
-    --c2: #c2f300;
-    --c3: #a8d200;
-    --c4: #5e7500;
+    --c0: color-mix(in srgb, var(--primary) 30%, white);
+    --c1: var(--primary);
+    --c2: color-mix(in srgb, var(--primary) 90%, black);
+    --c3: color-mix(in srgb, var(--primary) 80%, black);
+    --c4: color-mix(in srgb, var(--primary) 45%, black);
 
     --gradient-shadow: linear-gradient(
       45deg,
@@ -157,7 +157,7 @@ const { cards, numbered = false } = Astro.props;
     &:hover {
       &:before,
       &:after {
-        animation: animate 40s linear infinite;
+        animation-duration: 40s;
       }
       &:after {
         opacity: 0.7;
@@ -174,6 +174,13 @@ const { cards, numbered = false } = Astro.props;
       100% {
         background-position: 0 0;
       }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .shaddow:before,
+    .shaddow:after {
+      animation: none;
     }
   }
 </style>

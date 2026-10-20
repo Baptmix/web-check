@@ -27,7 +27,7 @@ const { links } = Astro.props;
   a {
     display: block;
     padding: 0.25rem 0.75rem;
-    border: 1px solid var(--background-lighter);
+    border: 1px solid var(--border);
     border-radius: 2rem;
     font-size: 0.85rem;
     color: var(--text-color-secondary);
@@ -38,7 +38,7 @@ const { links } = Astro.props;
     &:hover,
     &:focus-visible {
       border-color: var(--primary);
-      color: var(--primary);
+      color: var(--primary-increased-contrast);
       text-decoration: none;
     }
   }

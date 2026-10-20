@@ -8,6 +8,7 @@ const themes = [
 ];
 
 const defaultTheme = 'dark';
+const name = `theme-${crypto.randomUUID()}`;
 ---
 
 <div class="theme-switcher" role="radiogroup" aria-label="Theme">
@@ -15,7 +16,7 @@ const defaultTheme = 'dark';
     <label title={label}>
       <input
         type="radio"
-        name="theme"
+        name={name}
         value={value}
         aria-label={label}
         checked={value === defaultTheme}
@@ -24,6 +25,9 @@ const defaultTheme = 'dark';
     </label>
   ))}
 </div>
+<script is:inline>
+  window.webCheckTheme?.apply();
+</script>
 
 <style lang="scss">
   .theme-switcher {

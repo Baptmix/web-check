@@ -33,7 +33,7 @@ export const StyledRow = styled.div`
   > a {
     color: ${colors.textColor};
     &:hover {
-      color: ${colors.primary};
+      color: ${colors.primaryIncreasedContrast};
     }
   }
   /* Labels keep a third of the row, so long values can't squash them */
@@ -59,7 +59,7 @@ export const StyledRow = styled.div`
       text-overflow: ellipsis;
     }
     a {
-      color: ${colors.primary};
+      color: ${colors.primaryIncreasedContrast};
     }
   }
 `;
@@ -192,7 +192,13 @@ export const Section = (props: {
 }) => {
   const { title, collapsible, children } = props;
   const heading = (
-    <Heading as="h4" size="small" align="left" color={colors.primary} inline={collapsible}>
+    <Heading
+      as="h4"
+      size="small"
+      align="left"
+      color={colors.primaryIncreasedContrast}
+      inline={collapsible}
+    >
       {title}
     </Heading>
   );

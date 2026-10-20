@@ -33,7 +33,7 @@ const actionButtonStyles = `
   align-items: center;
   &:hover {
     color: ${colors.primary};
-    background: ${colors.backgroundDarker};
+    background: ${colors.backgroundSunken};
     box-shadow: none;
   }
 `;
