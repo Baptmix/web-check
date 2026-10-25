@@ -8,7 +8,7 @@
 # The workflow will:
 # - Resolve and validate the version up front, so bad input fails in seconds
 # - Build multi-arch (amd64, arm64) in parallel on native runners (no QEMU)
-# - Trivy scans + reports security issues, and fails cron on CRITICAL CVEs
+# - Trivy scans + reports security issues to code scanning, never blocking a publish
 # - Publishes to GHCR, then to Docker Hub if configured (never blocking GHCR)
 # - Attaches BuildKit per-arch SBOM + provenance to the image itself
 # - Signs provenance (index) and per-arch SBOMs (per-arch manifest) via Sigstore
@@ -168,30 +168,23 @@ jobs:
           tags: web-check-scan:${{ matrix.arch }}
           provenance: false
 
-      # Advisory everywhere except cron, so a Trivy outage can't block a release
+      # Advisory only, as blocking a rebuild just leaves the older, less patched image live.
+      # SARIF output always includes every severity, so there's no severity filter here
       - name: 🛡️ Trivy vulnerability scan
         id: scan
         uses: aquasecurity/trivy-action@v0.36.0
-        continue-on-error: ${{ github.event_name != 'schedule' }}
+        continue-on-error: true
         env:
           TRIVY_DB_REPOSITORY: ghcr.io/aquasecurity/trivy-db:2
           TRIVY_JAVA_DB_REPOSITORY: ghcr.io/aquasecurity/trivy-java-db:1
         with:
           image-ref: web-check-scan:${{ matrix.arch }}
-          severity: CRITICAL
           ignore-unfixed: true
-          exit-code: ${{ github.event_name == 'schedule' && '1' || '0' }}
+          exit-code: '0'
           vuln-type: 'os,library'
           format: 'sarif'
           output: 'trivy-${{ matrix.arch }}.sarif'
           timeout: '10m'
-
-      - name: 📋 List blocking CVEs (on scan failure)
-        if: always() && steps.scan.outcome == 'failure'
-        continue-on-error: true
-        run: |
-          jq -r '.runs[].results[]? | "\(.ruleId): \(.message.text)"' \
-            "trivy-${{ matrix.arch }}.sarif" | sort -u
 
       - name: 📤 Upload Trivy SARIF
         if: always() && hashFiles(format('trivy-{0}.sarif', matrix.arch)) != ''
